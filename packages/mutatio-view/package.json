@@ -27,7 +27,8 @@
   },
   "scripts": {
     "build": "vite build",
-    "dev": "vite build --watch"
+    "dev": "vite build --watch",
+    "typecheck": "vue-tsc --noEmit"
   },
   "dependencies": {
     "@git-diff-view/core": "^0.1.1"
