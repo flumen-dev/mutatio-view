@@ -1,6 +1,6 @@
 {
   "name": "@flumen-dev/mutatio-view",
-  "version": "0.1.0",
+  "version": "0.0.1-alpha.1",
   "description": "A Vue 3 diff editor component built on @git-diff-view/core",
   "license": "MIT",
   "repository": {
