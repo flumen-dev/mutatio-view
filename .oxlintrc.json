@@ -8,7 +8,18 @@
   },
   "rules": {
     "no-console": "warn",
-    "typescript/consistent-type-imports": "error"
+    "typescript/consistent-type-imports": "error",
+    "func-style": "off",
+    "no-ternary": "off",
+    "no-nested-ternary": "off",
+    "id-length": "off",
+    "sort-keys": "off",
+    "sort-imports": "off",
+    "no-magic-numbers": "off",
+    "init-declarations": "off",
+    "max-params": "off",
+    "unicorn/filename-case": "off",
+    "unicorn/no-nested-ternary": "off"
   },
   "ignorePatterns": ["dist/**", "node_modules/**"]
 }

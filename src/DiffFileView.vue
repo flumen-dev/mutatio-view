@@ -1,78 +1,97 @@
 <script lang="ts" setup>
-import { DiffFile } from '@git-diff-view/core'
-import DiffSplitView from './DiffSplitView.vue'
-import DiffUnifiedView from './DiffUnifiedView.vue'
-import { shallowRef, ref, watch, onUnmounted } from 'vue'
+import { DiffFile } from '@git-diff-view/core';
+import DiffSplitView from './DiffSplitView.vue';
+import DiffUnifiedView from './DiffUnifiedView.vue';
+import { onUnmounted, ref, shallowRef, triggerRef, watch } from 'vue';
 
 const props = defineProps<{
-  hunks: string[]
-  oldFileName?: string
-  newFileName?: string
-  oldContent?: string
-  newContent?: string
-  mode: 'split' | 'unified'
-  highlight?: boolean
-  wrap?: boolean
-  theme?: 'light' | 'dark'
-  selectedStart?: number
-  selectedEnd?: number
-  labelExpandUp?: string
-  labelExpandDown?: string
-  labelExpandAll?: string
-}>()
+  hunks: string[];
+  oldFileName?: string;
+  newFileName?: string;
+  oldContent?: string;
+  newContent?: string;
+  mode: 'split' | 'unified';
+  highlight?: boolean;
+  wrap?: boolean;
+  theme?: 'light' | 'dark';
+  selectedStart?: number;
+  selectedEnd?: number;
+  labelExpandUp?: string;
+  labelExpandDown?: string;
+  labelExpandAll?: string;
+}>();
 
 const emit = defineEmits<{
-  lineClick: [lineNumber: number, shiftKey: boolean]
-}>()
+  lineClick: [lineNumber: number, shiftKey: boolean];
+}>();
 
-const diffFile = shallowRef<DiffFile>()
-const renderTick = ref(0)
+const diffFile = shallowRef<DiffFile>();
+const renderTick = ref(0);
 
 function getLang(fileName?: string) {
-  return fileName?.split('.').pop() || ''
+  return fileName?.split('.').pop() || '';
 }
 
-let unsubscribe: (() => void) | undefined
+let unsubscribe: (() => void) | undefined;
 
 watch(
-  () => [props.hunks, props.oldFileName, props.newFileName, props.oldContent, props.newContent] as const,
+  () =>
+    [
+      props.hunks,
+      props.oldFileName,
+      props.newFileName,
+      props.oldContent,
+      props.newContent,
+    ] as const,
   () => {
-    unsubscribe?.()
-    diffFile.value?.clear()
+    unsubscribe?.();
+    diffFile.value?.clear();
 
     const file = DiffFile.createInstance({
-      oldFile: { fileName: props.oldFileName, fileLang: getLang(props.oldFileName), content: props.oldContent },
-      newFile: { fileName: props.newFileName, fileLang: getLang(props.newFileName), content: props.newContent },
       hunks: props.hunks,
-    })
+      newFile: {
+        fileName: props.newFileName,
+        fileLang: getLang(props.newFileName),
+        content: props.newContent,
+      },
+      oldFile: {
+        fileName: props.oldFileName,
+        fileLang: getLang(props.oldFileName),
+        content: props.oldContent,
+      },
+    });
 
-    file.initTheme(props.theme === 'dark' ? 'dark' : 'light')
-    file.init()
+    file.initTheme(props.theme === 'dark' ? 'dark' : 'light');
+    file.init();
 
-    file.buildSplitDiffLines()
-    file.buildUnifiedDiffLines()
+    file.buildSplitDiffLines();
+    file.buildUnifiedDiffLines();
 
     unsubscribe = file.subscribe(() => {
-      renderTick.value++
-    })
+      triggerRef(diffFile);
+      renderTick.value++;
+    });
 
-    diffFile.value = file
-    renderTick.value++
+    diffFile.value = file;
+    renderTick.value++;
   },
   { immediate: true },
-)
+);
 
 onUnmounted(() => {
-  unsubscribe?.()
-  diffFile.value?.clear()
-})
+  unsubscribe?.();
+  diffFile.value?.clear();
+});
 
-watch(() => props.theme, () => {
-  if (diffFile.value) {
-    diffFile.value.initTheme(props.theme === 'dark' ? 'dark' : 'light')
-    renderTick.value++
-  }
-})
+watch(
+  () => props.theme,
+  () => {
+    if (diffFile.value) {
+      diffFile.value.initTheme(props.theme === 'dark' ? 'dark' : 'light');
+      renderTick.value++;
+    }
+  },
+);
 </script>
 
 <template>
