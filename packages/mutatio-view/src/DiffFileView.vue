@@ -52,7 +52,10 @@ function onLineClick(lineNumber: number, shiftKey: boolean) {
   }
 
   lastClicked = lineNumber;
-  emit('selectionChange', [...current].toSorted((a, b) => a - b));
+  emit(
+    'selectionChange',
+    [...current].toSorted((a, b) => a - b),
+  );
 }
 
 function getLang(fileName?: string) {

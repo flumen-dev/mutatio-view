@@ -110,7 +110,11 @@ function onNumClick(e: MouseEvent, line: UnifiedLineItem) {
           >
             <td
               class="line-num"
-              :style="{ backgroundColor: isSelected(getLine(i - 1)) ? 'var(--diff-selected-bg)' : numBg(getLine(i - 1).diff?.type) }"
+              :style="{
+                backgroundColor: isSelected(getLine(i - 1))
+                  ? 'var(--diff-selected-bg)'
+                  : numBg(getLine(i - 1).diff?.type),
+              }"
               @click="onNumClick($event, getLine(i - 1))"
             >
               {{ getLine(i - 1).oldLineNumber ?? '' }}
@@ -118,7 +122,11 @@ function onNumClick(e: MouseEvent, line: UnifiedLineItem) {
 
             <td
               class="line-num"
-              :style="{ backgroundColor: isSelected(getLine(i - 1)) ? 'var(--diff-selected-bg)' : numBg(getLine(i - 1).diff?.type) }"
+              :style="{
+                backgroundColor: isSelected(getLine(i - 1))
+                  ? 'var(--diff-selected-bg)'
+                  : numBg(getLine(i - 1).diff?.type),
+              }"
               @click="onNumClick($event, getLine(i - 1))"
             >
               {{ getLine(i - 1).newLineNumber ?? '' }}
@@ -127,7 +135,11 @@ function onNumClick(e: MouseEvent, line: UnifiedLineItem) {
             <td
               class="diff-content"
               :class="wrap ? 'wrap-mode' : 'nowrap-mode'"
-              :style="{ backgroundColor: isSelected(getLine(i - 1)) ? 'var(--diff-selected-bg)' : contentBg(getLine(i - 1).diff?.type) }"
+              :style="{
+                backgroundColor: isSelected(getLine(i - 1))
+                  ? 'var(--diff-selected-bg)'
+                  : contentBg(getLine(i - 1).diff?.type),
+              }"
               v-html="getContentHtml(getLine(i - 1))"
             />
           </tr>

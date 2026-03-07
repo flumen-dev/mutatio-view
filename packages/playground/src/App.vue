@@ -64,28 +64,27 @@ function toggleTheme() {
 </script>
 
 <template>
-  <div style="max-width: 1200px; margin: 0 auto;">
-    <h1 style="margin-bottom: 16px;">Mutatio View Playground</h1>
+  <div style="max-width: 1200px; margin: 0 auto">
+    <h1 style="margin-bottom: 16px">Mutatio View Playground</h1>
 
-    <div style="display: flex; gap: 8px; margin-bottom: 16px;">
+    <div style="display: flex; gap: 8px; margin-bottom: 16px">
       <button @click="mode = 'split'" :style="{ fontWeight: mode === 'split' ? 'bold' : 'normal' }">
         Split
       </button>
-      <button @click="mode = 'unified'" :style="{ fontWeight: mode === 'unified' ? 'bold' : 'normal' }">
+      <button
+        @click="mode = 'unified'"
+        :style="{ fontWeight: mode === 'unified' ? 'bold' : 'normal' }"
+      >
         Unified
       </button>
-      <button @click="wrap = !wrap">
-        Wrap: {{ wrap ? 'On' : 'Off' }}
-      </button>
-      <button @click="toggleTheme">
-        Theme: {{ theme }}
-      </button>
-      <span v-if="selectedLines.length" style="margin-left: auto; font-size: 14px; opacity: 0.7;">
+      <button @click="wrap = !wrap">Wrap: {{ wrap ? 'On' : 'Off' }}</button>
+      <button @click="toggleTheme">Theme: {{ theme }}</button>
+      <span v-if="selectedLines.length" style="margin-left: auto; font-size: 14px; opacity: 0.7">
         Selected: {{ selectedLines.join(', ') }}
       </span>
     </div>
 
-    <div style="border: 1px solid #d1d9e0; border-radius: 8px; overflow: hidden;">
+    <div style="border: 1px solid #d1d9e0; border-radius: 8px; overflow: hidden">
       <DiffFileView
         :hunks="[sampleDiff]"
         old-file-name="src/hello.ts"
