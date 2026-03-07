@@ -7,7 +7,8 @@
     "dev:playground": "pnpm -r --filter @flumen-dev/playground dev",
     "lint": "oxlint && oxfmt --check",
     "lint:fix": "oxlint --fix && oxfmt",
-    "typecheck": "pnpm -r typecheck"
+    "typecheck": "pnpm -r typecheck",
+    "release": "./scripts/release.sh"
   },
   "devDependencies": {
     "oxfmt": "^0.36.0",
