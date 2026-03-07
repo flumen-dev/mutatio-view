@@ -7,7 +7,7 @@
     "dev:playground": "pnpm -r --filter @flumen-dev/playground dev",
     "lint": "oxlint && oxfmt --check",
     "lint:fix": "oxlint --fix && oxfmt",
-    "typecheck": "pnpm -r typecheck",
+    "typecheck": "pnpm -r --filter @flumen-dev/mutatio-view typecheck",
     "release": "./scripts/release.sh"
   },
   "devDependencies": {
