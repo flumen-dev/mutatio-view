@@ -1,0 +1,39 @@
+{
+  "name": "@flumen-dev/mutatio-view",
+  "version": "0.1.0",
+  "description": "A Vue 3 diff editor component built on @git-diff-view/core",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/flumen-dev/mutatio-view.git",
+    "directory": "packages/mutatio-view"
+  },
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./style.css": "./dist/index.css"
+  },
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite build --watch"
+  },
+  "dependencies": {
+    "@git-diff-view/core": "^0.1.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.2.0",
+    "vite-plugin-dts": "^4.5.0"
+  },
+  "peerDependencies": {
+    "vue": "^3.4.0"
+  }
+}

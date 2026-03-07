@@ -1,48 +1,21 @@
 {
-  "name": "@flumen-dev/mutatio-view",
-  "version": "0.1.0",
-  "description": "A Vue 3 diff editor component built on @git-diff-view/core",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/flumen-dev/mutatio-view.git"
-  },
-  "files": [
-    "dist"
-  ],
-  "type": "module",
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
-    },
-    "./style.css": "./dist/index.css"
-  },
+  "name": "mutatio-view-monorepo",
+  "private": true,
   "scripts": {
-    "build": "vite build",
-    "dev": "vite build --watch",
+    "build": "pnpm -r --filter @flumen-dev/mutatio-view build",
+    "dev": "pnpm -r --parallel dev",
+    "dev:playground": "pnpm -r --filter @flumen-dev/playground dev",
     "lint": "oxlint && oxfmt --check",
     "lint:fix": "oxlint --fix && oxfmt",
-    "typecheck": "vue-tsc --noEmit"
-  },
-  "dependencies": {
-    "@git-diff-view/core": "^0.1.1"
+    "typecheck": "pnpm -r typecheck"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^5.2.0",
     "oxfmt": "^0.36.0",
     "oxlint": "^1.51.0",
     "typescript": "^5.9.0",
     "vite": "^6.3.0",
-    "vite-plugin-dts": "^4.5.0",
     "vue": "^3.5.0",
     "vue-tsc": "^2.2.0"
-  },
-  "peerDependencies": {
-    "vue": "^3.4.0"
   },
   "packageManager": "pnpm@10.30.3"
 }

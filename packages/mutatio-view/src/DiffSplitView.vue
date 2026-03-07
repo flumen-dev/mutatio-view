@@ -8,8 +8,7 @@ const props = withDefaults(
     renderTick: number;
     wrap: boolean;
     expandable: boolean;
-    selectedStart?: number;
-    selectedEnd?: number;
+    selectedLines: Set<number>;
     labelExpandUp?: string;
     labelExpandDown?: string;
     labelExpandAll?: string;
@@ -26,11 +25,10 @@ const emit = defineEmits<{
 }>();
 
 function isSelected(lineNum: number | undefined) {
-  if (!lineNum || !props.selectedStart || !props.selectedEnd) {
+  if (!lineNum) {
     return false;
   }
-
-  return lineNum >= props.selectedStart && lineNum <= props.selectedEnd;
+  return props.selectedLines.has(lineNum);
 }
 
 function getContentHtml(line: SplitLineItem, side: 'old' | 'new'): string {
@@ -102,12 +100,12 @@ function onNumClick(e: MouseEvent, lineNum: number) {
           <tr
             v-else-if="!left(i - 1).isHidden || !right(i - 1).isHidden"
             :class="{
-              'row-selected': isSelected(right(i - 1).lineNumber ?? left(i - 1).lineNumber),
+              'row-selected': isSelected(right(i - 1).lineNumber) || isSelected(left(i - 1).lineNumber),
             }"
           >
             <td
               class="line-num"
-              :style="{ backgroundColor: numBg(left(i - 1).diff?.type) }"
+              :style="{ backgroundColor: isSelected(left(i - 1).lineNumber) ? 'var(--diff-selected-bg)' : numBg(left(i - 1).diff?.type) }"
               @click="left(i - 1).lineNumber && onNumClick($event, left(i - 1).lineNumber!)"
             >
               {{ left(i - 1).lineNumber ?? '' }}
@@ -116,13 +114,13 @@ function onNumClick(e: MouseEvent, lineNum: number) {
             <td
               class="diff-content split-content side-left"
               :class="wrap ? 'wrap-mode' : 'nowrap-mode'"
-              :style="{ backgroundColor: contentBg(left(i - 1).diff?.type) }"
+              :style="{ backgroundColor: isSelected(left(i - 1).lineNumber) ? 'var(--diff-selected-bg)' : contentBg(left(i - 1).diff?.type) }"
               v-html="getContentHtml(left(i - 1), 'old')"
             />
 
             <td
               class="line-num"
-              :style="{ backgroundColor: numBg(right(i - 1).diff?.type) }"
+              :style="{ backgroundColor: isSelected(right(i - 1).lineNumber) ? 'var(--diff-selected-bg)' : numBg(right(i - 1).diff?.type) }"
               @click="right(i - 1).lineNumber && onNumClick($event, right(i - 1).lineNumber!)"
             >
               {{ right(i - 1).lineNumber ?? '' }}
@@ -131,7 +129,7 @@ function onNumClick(e: MouseEvent, lineNum: number) {
             <td
               class="diff-content split-content"
               :class="wrap ? 'wrap-mode' : 'nowrap-mode'"
-              :style="{ backgroundColor: contentBg(right(i - 1).diff?.type) }"
+              :style="{ backgroundColor: isSelected(right(i - 1).lineNumber) ? 'var(--diff-selected-bg)' : contentBg(right(i - 1).diff?.type) }"
               v-html="getContentHtml(right(i - 1), 'new')"
             />
           </tr>

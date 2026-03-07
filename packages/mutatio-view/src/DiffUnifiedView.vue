@@ -8,8 +8,7 @@ const props = withDefaults(
     renderTick: number;
     wrap: boolean;
     expandable: boolean;
-    selectedStart?: number;
-    selectedEnd?: number;
+    selectedLines: Set<number>;
     labelExpandUp?: string;
     labelExpandDown?: string;
     labelExpandAll?: string;
@@ -47,10 +46,10 @@ function lineKey(line: UnifiedLineItem): number | undefined {
 
 function isSelected(line: UnifiedLineItem) {
   const num = lineKey(line);
-  if (!num || !props.selectedStart || !props.selectedEnd) {
+  if (!num) {
     return false;
   }
-  return num >= props.selectedStart && num <= props.selectedEnd;
+  return props.selectedLines.has(num);
 }
 
 function getContentHtml(line: UnifiedLineItem): string {
@@ -111,7 +110,7 @@ function onNumClick(e: MouseEvent, line: UnifiedLineItem) {
           >
             <td
               class="line-num"
-              :style="{ backgroundColor: numBg(getLine(i - 1).diff?.type) }"
+              :style="{ backgroundColor: isSelected(getLine(i - 1)) ? 'var(--diff-selected-bg)' : numBg(getLine(i - 1).diff?.type) }"
               @click="onNumClick($event, getLine(i - 1))"
             >
               {{ getLine(i - 1).oldLineNumber ?? '' }}
@@ -119,7 +118,7 @@ function onNumClick(e: MouseEvent, line: UnifiedLineItem) {
 
             <td
               class="line-num"
-              :style="{ backgroundColor: numBg(getLine(i - 1).diff?.type) }"
+              :style="{ backgroundColor: isSelected(getLine(i - 1)) ? 'var(--diff-selected-bg)' : numBg(getLine(i - 1).diff?.type) }"
               @click="onNumClick($event, getLine(i - 1))"
             >
               {{ getLine(i - 1).newLineNumber ?? '' }}
@@ -128,7 +127,7 @@ function onNumClick(e: MouseEvent, line: UnifiedLineItem) {
             <td
               class="diff-content"
               :class="wrap ? 'wrap-mode' : 'nowrap-mode'"
-              :style="{ backgroundColor: contentBg(getLine(i - 1).diff?.type) }"
+              :style="{ backgroundColor: isSelected(getLine(i - 1)) ? 'var(--diff-selected-bg)' : contentBg(getLine(i - 1).diff?.type) }"
               v-html="getContentHtml(getLine(i - 1))"
             />
           </tr>
