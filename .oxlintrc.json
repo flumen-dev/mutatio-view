@@ -1,0 +1,14 @@
+{
+  "plugins": ["unicorn", "typescript", "oxc"],
+  "categories": {
+    "correctness": "error",
+    "suspicious": "warn",
+    "perf": "warn",
+    "style": "warn"
+  },
+  "rules": {
+    "no-console": "warn",
+    "typescript/consistent-type-imports": "error"
+  },
+  "ignorePatterns": ["dist/**", "node_modules/**"]
+}
