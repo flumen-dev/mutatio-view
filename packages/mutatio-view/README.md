@@ -182,6 +182,12 @@ import { markerPrefix, contentBg, numBg, buildContentHtml } from '@flumen-dev/mu
 import '@flumen-dev/mutatio-view/style.css'
 ```
 
+## Roadmap
+
+- **Inline word & character-level diffs** — highlight the exact characters that changed within a line, not just the whole line
+- **Virtual scrolling** — render only visible lines for smooth performance on large diffs (1000+ lines)
+- **Minimap** — a vertical scroll overview showing add/delete blocks at a glance with click-to-jump navigation
+
 ## Support
 
 mutatio-view is **free and open source**. If you find it useful, consider supporting development:
