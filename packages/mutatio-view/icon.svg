@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" fill="none">
+  <!-- Left panel (old/removed) -->
+  <rect x="48" y="80" width="200" height="352" rx="24" fill="#818cf8" opacity="0.7"/>
+
+  <!-- Right panel (new/added) - slightly offset for depth -->
+  <rect x="264" y="80" width="200" height="352" rx="24" fill="#6366f1"/>
+
+  <!-- Divider line with gradient glow -->
+  <line x1="256" y1="112" x2="256" y2="400" stroke="white" stroke-width="3" stroke-linecap="round" opacity="0.5"/>
+
+  <!-- Left side: removal indicators (subtle lines) -->
+  <line x1="96" y1="176" x2="196" y2="176" stroke="white" stroke-width="8" stroke-linecap="round" opacity="0.35"/>
+  <line x1="96" y1="224" x2="172" y2="224" stroke="white" stroke-width="8" stroke-linecap="round" opacity="0.35"/>
+  <line x1="96" y1="272" x2="184" y2="272" stroke="white" stroke-width="8" stroke-linecap="round" opacity="0.35"/>
+
+  <!-- Left minus symbol -->
+  <line x1="118" y1="340" x2="158" y2="340" stroke="white" stroke-width="10" stroke-linecap="round" opacity="0.6"/>
+
+  <!-- Right side: addition indicators (bright lines) -->
+  <line x1="316" y1="176" x2="404" y2="176" stroke="white" stroke-width="8" stroke-linecap="round" opacity="0.5"/>
+  <line x1="316" y1="224" x2="388" y2="224" stroke="white" stroke-width="8" stroke-linecap="round" opacity="0.5"/>
+  <line x1="316" y1="272" x2="396" y2="272" stroke="white" stroke-width="8" stroke-linecap="round" opacity="0.5"/>
+
+  <!-- Right plus symbol -->
+  <line x1="338" y1="340" x2="378" y2="340" stroke="white" stroke-width="10" stroke-linecap="round" opacity="0.85"/>
+  <line x1="358" y1="320" x2="358" y2="360" stroke="white" stroke-width="10" stroke-linecap="round" opacity="0.85"/>
+
+  <!-- Subtle delta/change arrow in center -->
+  <path d="M240 440 L256 464 L272 440" stroke="#a5b4fc" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.7"/>
+</svg>
